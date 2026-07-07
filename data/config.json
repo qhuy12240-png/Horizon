@@ -1,0 +1,40 @@
+{
+  "version": "1.0",
+  "ai": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "api_key_env": "DEEPSEEK_API_KEY",
+    "temperature": 0.3,
+    "max_tokens": 4096,
+    "throttle_sec": 0,
+    "analysis_concurrency": 1,
+    "enrichment_concurrency": 1
+  },
+  "sources": {
+    "rss": [
+      { "name": "arXiv q-fin.TR (Trading & Market Microstructure)", "url": "http://export.arxiv.org/rss/q-fin.TR", "enabled": true, "category": "quant-trading" },
+      { "name": "arXiv q-fin.CP (Computational Finance)", "url": "http://export.arxiv.org/rss/q-fin.CP", "enabled": true, "category": "quant-trading" },
+      { "name": "arXiv q-fin.ST (Statistical Finance)", "url": "http://export.arxiv.org/rss/q-fin.ST", "enabled": true, "category": "quant-trading" },
+      { "name": "arXiv q-fin.PM (Portfolio Management)", "url": "http://export.arxiv.org/rss/q-fin.PM", "enabled": true, "category": "quant-trading" },
+      { "name": "arXiv q-fin.RM (Risk Management)", "url": "http://export.arxiv.org/rss/q-fin.RM", "enabled": true, "category": "quant-trading" }
+    ],
+    "reddit": {
+      "enabled": true,
+      "subreddits": [
+        { "subreddit": "algotrading", "enabled": true, "sort": "hot", "time_filter": "day", "fetch_limit": 15, "min_score": 30 },
+        { "subreddit": "quant", "enabled": true, "sort": "hot", "time_filter": "day", "fetch_limit": 15, "min_score": 20 },
+        { "subreddit": "QuantitativeFinance", "enabled": true, "sort": "hot", "time_filter": "day", "fetch_limit": 15, "min_score": 20 }
+      ],
+      "users": [],
+      "fetch_comments": 3
+    }
+  },
+  "filtering": {
+    "ai_score_threshold": 6.5,
+    "time_window_hours": 24,
+    "max_items": 40,
+    "category_groups": {},
+    "default_group": "other",
+    "default_group_limit": null
+  }
+}

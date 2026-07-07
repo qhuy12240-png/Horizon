@@ -1,0 +1,27 @@
+name: Daily Horizon → Supabase
+
+on:
+  schedule:
+    - cron: "0 22 * * *" # 22:00 UTC = 5:00 sáng giờ VN
+  workflow_dispatch: # cho phép bấm chạy tay để test
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+
+      - run: uv sync
+
+      - name: Run Horizon
+        run: uv run horizon --hours 24
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+
+      - name: Push to Supabase
+        run: uv run --with requests python push_to_supabase.py
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
